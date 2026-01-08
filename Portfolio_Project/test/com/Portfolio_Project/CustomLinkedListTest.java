@@ -30,6 +30,7 @@ class CustomLinkedListPersonTest {
         list.insert(alice);
         list.insert(bob);
 
+        // deleteFirst returns the *data* of the removed node
         Person removed = list.deleteFirst();
         assertEquals(alice, removed);
 
