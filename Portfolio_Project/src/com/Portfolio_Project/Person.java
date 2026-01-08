@@ -24,8 +24,13 @@ public class Person {
      * Sets the first name of the person.
      *
      * @param firstName the first name to set
+     * @throws IllegalArgumentException if firstName is null or empty
      */
     public void setFirstName(String firstName) {
+        // Check if firstName input is null or empty
+        if (firstName == null || firstName.isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be empty or null.");
+        }
         this.firstName = firstName;
     }
 
@@ -42,8 +47,13 @@ public class Person {
      * Sets the last name of the person.
      *
      * @param lastName the first name to set
+     * @throws IllegalArgumentException if lastName is null or empty
      */
     public void setLastName(String lastName) {
+        // Check if lastName input is null or empty
+        if (lastName == null || lastName.isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be empty or null.");
+        }
         this.lastName = lastName;
     }
 
@@ -60,8 +70,13 @@ public class Person {
      * Sets the age of the person.
      *
      * @param age the age to set
+     * @throws IllegalArgumentException if age is less than 0 or greater than 125
      */
     public void setAge(int age) {
+        // Check if age input is not within '0' to '125'
+        if (age < 0 || age > 125) {
+            throw new IllegalArgumentException("Age cannot be less than '0' or greater than '125'.");
+        }
         this.age = age;
     }
 
