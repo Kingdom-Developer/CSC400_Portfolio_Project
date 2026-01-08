@@ -30,58 +30,39 @@ public class CustomLinkedList<T> {
 
         // Check if the list is empty
         if (head == null) {
-            // Set newNode as the head and tail node
+            // Set newNode as the head node
             head = newNode;
-            tail = newNode;
         }
         else {
             // Insert new node at the end of the list
             tail.next = newNode;
-            tail = newNode;
         }
+        // Set newNode as the tail node
+        tail = newNode;
     }
 
     /**
-     * Deletes the first occurrence of a node with the given data
-     * @param data the data to look for in node for deletion
+     * Deletes the head node (front of the CustomLinkedList)
+     * @return the data to look for in node for deletion
      */
-    public void delete(T data) {
-        // Check if the list is empty
+    public T deleteFirst() {
+        // Check if CustomLinkedList is null
         if (head == null) {
-            return;
+            return null;
         }
 
-        // Check if head Node contains first occurrence of data
-        if (head.data.equals(data)) {
-            head = head.next;
+        // Store the node to return
+        Node<T> tempNode = head;
 
-            // Check if list is now empty and set tail to null if it is
-            if (head == null) {
-                tail = null;
-            }
-            return;
+        // Move head forward
+        head = head.next;
+
+        // If list is now empty, update tail
+        if (head == null) {
+            tail = null;
         }
 
-        Node<T> currentNode = head;
-        // Traverse through list to check if any Node's data matches the input data and if so, remove the Node
-        while (currentNode.next != null) {
-            // Check if currentNode's next Node's data matches
-            if (currentNode.next.data.equals(data)) {
-                // Remove currentNode's next Node
-                currentNode.next = currentNode.next.next;
-
-                // Check if the removed Node was the tail
-                if (currentNode.next == null) {
-                    tail = currentNode;
-                }
-                return;
-            }
-
-            // Move to next Node in list
-            currentNode = currentNode.next;
-        }
-        // When method reaches this point, print that the value was not found
-        System.out.println("Unable to delete '" + data + "', value not found.");
+        return tempNode.getData();
     }
 
     /**
@@ -95,9 +76,18 @@ public class CustomLinkedList<T> {
     /**
      * Node class to be used by CustomLinkedList
      */
-    private class Node<T> {
+    public static class Node<T> {
         T data;
         Node<T> next;
+
+        /**
+         * Gets the data of the node
+         *
+         * @return data of the node
+         */
+        public T getData() {
+            return data;
+        }
 
         /**
          * Parameterized constructor for Node
@@ -110,7 +100,7 @@ public class CustomLinkedList<T> {
     }
 
     /**
-     * Implements a iterator object for the CustomLinkedList
+     * Implements an iterator object for the CustomLinkedList
      */
     private class LinkedListIterator implements Iterator<T> {
         private Node<T> current = head;
