@@ -3,6 +3,7 @@ package com.Portfolio_Project;
 import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomLinkedListPersonTest {
@@ -16,12 +17,12 @@ class CustomLinkedListPersonTest {
 
         Iterator<Person> it = list.iterator();
         assertTrue(it.hasNext());
-        assertEquals(alice, it.next());   // same instance
+        assertEquals(alice, it.next());
         assertFalse(it.hasNext());
     }
 
     @Test
-    void testDeletePerson() {
+    void testDeleteFirstPerson() {
         CustomLinkedList<Person> list = new CustomLinkedList<>();
 
         Person alice = new Person("Alice", "Smith", 30);
@@ -30,7 +31,9 @@ class CustomLinkedListPersonTest {
         list.insert(alice);
         list.insert(bob);
 
-        list.delete(alice);   // must pass same object reference
+        // deleteFirst returns the *data* of the removed node
+        Person removed = list.deleteFirst();
+        assertEquals(alice, removed);
 
         Iterator<Person> it = list.iterator();
         assertTrue(it.hasNext());
