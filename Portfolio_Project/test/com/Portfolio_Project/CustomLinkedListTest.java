@@ -5,53 +5,66 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CustomLinkedListTest {
-    @Test
-    void testInsertSingleElement() {
-        CustomLinkedList list = new CustomLinkedList();
-        list.insert(1);
+class CustomLinkedListPersonTest {
 
-        Iterator<Integer> it = list.iterator();
+    @Test
+    void testInsertPerson() {
+        CustomLinkedList<Person> list = new CustomLinkedList<>();
+
+        Person alice = new Person("Alice", "Smith", 30);
+        list.insert(alice);
+
+        Iterator<Person> it = list.iterator();
         assertTrue(it.hasNext());
-        assertEquals(1, it.next());
+        assertEquals(alice, it.next());   // same instance
         assertFalse(it.hasNext());
     }
 
     @Test
-    void testDeleteSingleElement() {
-        CustomLinkedList list = new CustomLinkedList();
-        list.insert(1);
-        list.insert(2);
-        list.delete(1);
+    void testDeletePerson() {
+        CustomLinkedList<Person> list = new CustomLinkedList<>();
 
-        Iterator<Integer> it = list.iterator();
+        Person alice = new Person("Alice", "Smith", 30);
+        Person bob = new Person("Bob", "Jones", 25);
+
+        list.insert(alice);
+        list.insert(bob);
+
+        list.delete(alice);   // must pass same object reference
+
+        Iterator<Person> it = list.iterator();
         assertTrue(it.hasNext());
-        assertEquals(2, it.next());
+        assertEquals(bob, it.next());
         assertFalse(it.hasNext());
     }
 
     @Test
-    void testLinkedListIterator() {
-        CustomLinkedList list = new CustomLinkedList();
-        list.insert(1);
-        list.insert(2);
-        list.insert(3);
-        list.insert(4);
+    void testPersonIteratorOrder() {
+        CustomLinkedList<Person> list = new CustomLinkedList<>();
 
-        Iterator<Integer> it = list.iterator();
-        assertEquals(1, it.next());
-        assertEquals(2, it.next());
-        assertEquals(3, it.next());
-        assertEquals(4, it.next());
+        Person a = new Person("A", "One", 10);
+        Person b = new Person("B", "Two", 20);
+        Person c = new Person("C", "Three", 30);
+
+        list.insert(a);
+        list.insert(b);
+        list.insert(c);
+
+        Iterator<Person> it = list.iterator();
+        assertEquals(a, it.next());
+        assertEquals(b, it.next());
+        assertEquals(c, it.next());
         assertFalse(it.hasNext());
     }
 
     @Test
     void testIteratorThrowsExceptionWhenNoNext() {
-        CustomLinkedList list = new CustomLinkedList();
-        list.insert(10);
+        CustomLinkedList<Person> list = new CustomLinkedList<>();
 
-        Iterator<Integer> it = list.iterator();
+        Person p = new Person("Zed", "Zero", 99);
+        list.insert(p);
+
+        Iterator<Person> it = list.iterator();
         it.next();
         assertThrows(NoSuchElementException.class, it::next);
     }
