@@ -6,7 +6,7 @@ package com.Portfolio_Project;
  *
  * @author Nolan_Hill
  */
-public class LinkedQueue {
+public class Person {
     private String firstName;
     private String lastName;
     private int age;
@@ -89,7 +89,7 @@ public class LinkedQueue {
      * @throws IllegalArgumentException if firstName or lastName is null or empty,
      * or if age is not between 0 and 125 (inclusively).
      */
-    public LinkedQueue(String firstName, String lastName, int age) {
+    public Person(String firstName, String lastName, int age) {
         // Check if firstName input is null or empty
         if (firstName == null || firstName.isEmpty()) {
             throw new IllegalArgumentException("First name cannot be empty or null.");

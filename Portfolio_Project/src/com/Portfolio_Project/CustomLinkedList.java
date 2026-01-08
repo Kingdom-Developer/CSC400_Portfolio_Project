@@ -11,6 +11,25 @@ import java.util.NoSuchElementException;
 public class CustomLinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
+    private int size;
+
+    /**
+     * Gets head of the CustomLinkedList
+     *
+     * @return the head of CustomLinkedList
+     */
+    public Node<T> getHead() {
+        return this.head;
+    }
+
+    /**
+     * Gets the size of the CustomLinkedList
+     *
+     * @return the size of CustomLinkedList
+     */
+    public int getSize() {
+        return this.size;
+    }
 
     /**
      * Default constructor to create empty CustomLinkedList
@@ -18,6 +37,7 @@ public class CustomLinkedList<T> {
     public CustomLinkedList() {
         this.head = null;
         this.tail = null;
+        this.size = 0;
     }
 
     /**
@@ -39,6 +59,9 @@ public class CustomLinkedList<T> {
         }
         // Set newNode as the tail node
         tail = newNode;
+
+        // Increment size
+        this.size++;
     }
 
     /**
@@ -62,6 +85,8 @@ public class CustomLinkedList<T> {
             tail = null;
         }
 
+        // Decrement size
+        this.size--;
         return tempNode.getData();
     }
 
