@@ -3,54 +3,77 @@ package com.Portfolio_Project;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Provides methods to sort a list of generic type using the Quick Sort algorithm
+ * <p>Uses a divide-and-conquer approach by selecting a pivot value at the midpoint
+ * and swapping out-of-place elements based on their comparison to the pivot</p>
+ */
 public class QuickSort {
-    private static int partition(List<Person> list, int lowIndex, int highIndex,
-                                 Comparator<Person> comp) {
 
-        int midpoint = lowIndex + (highIndex - lowIndex) / 2;
-        Person pivot = list.get(midpoint);
+    /**
+     *
+     * @param list input List of generic data type
+     * @param low the start index of the input List
+     * @param high the ending index of the input List
+     * @param comp the comparator used to compare elements
+     * @return the last index of the right subset
+     * @param <T>
+     */
+    private static <T> int partition(List<T> list, int low, int high, Comparator<T> comp) {
+        // Find middle of the list
+        int mid = low + (high - low) / 2;
+        // Set pivot value as the midpoint
+        T pivot = list.get(mid);
 
         boolean done = false;
 
         while (!done) {
-
-            // Move lowIndex right while list[lowIndex] < pivot (according to comparator)
-            while (comp.compare(list.get(lowIndex), pivot) < 0) {
-                lowIndex++;
+            // Move low index up until item that is greater than or equal to pivot values is found
+            while (comp.compare(list.get(low), pivot) < 0) {
+                low++;
             }
 
-            // Move highIndex left while pivot < list[highIndex]
-            while (comp.compare(pivot, list.get(highIndex)) < 0) {
-                highIndex--;
+            // Move high index down until item that is less than or equal to pivot values is found
+            while (comp.compare(pivot, list.get(high)) < 0) {
+                high--;
             }
 
             // If indices cross, partition is complete
-            if (lowIndex >= highIndex) {
+            if (low >= high) {
                 done = true;
-            } else {
-                // Swap
-                Person temp = list.get(lowIndex);
-                list.set(lowIndex, list.get(highIndex));
-                list.set(highIndex, temp);
+            }
+            else {
+                // Swap items that are out of place
+                T temp = list.get(low);
+                list.set(low, list.get(high));
+                list.set(high, temp);
 
-                lowIndex++;
-                highIndex--;
+                low++;
+                high--;
             }
         }
-
-        return highIndex;
+        return high;
     }
 
-    public static void quickSort(List<Person> list, int lowIndex, int highIndex,
-                                 Comparator<Person> comp) {
-
-        if (lowIndex >= highIndex) {
-            return; // base case
+    /**
+     * Recursive method that sorts using the Quick sort algorithm
+     * @param list input List of generic data type
+     * @param low the start index of the input List
+     * @param high the ending index of the input List
+     * @param comp the comparator used to compare elements
+     * @param <T> the type of element in the list
+     */
+    public static <T> void quickSort(List<T> list, int low, int high, Comparator<T> comp) {
+        // Check for base case
+        if (low >= high) {
+            return;
         }
 
-        int lowEndIndex = partition(list, lowIndex, highIndex, comp);
+        // Continue to partition
+        int lowEndIndex = partition(list, low, high, comp);
 
-        quickSort(list, lowIndex, lowEndIndex, comp);
-        quickSort(list, lowEndIndex + 1, highIndex, comp);
+        // Sort each subarray
+        quickSort(list, low, lowEndIndex, comp);
+        quickSort(list, lowEndIndex + 1, high, comp);
     }
 }
