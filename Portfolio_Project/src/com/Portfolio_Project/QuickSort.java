@@ -17,9 +17,20 @@ public class QuickSort {
      * @param high the ending index of the input List
      * @param comp the comparator used to compare elements
      * @return the last index of the right subset
-     * @param <T>
+     * @param <T> the type of element in the list
+     * @throws IllegalArgumentException if list is null or empty
      */
     private static <T> int partition(List<T> list, int low, int high, Comparator<T> comp) {
+        // Check if the list is null
+        if (list == null) {
+            throw new IllegalArgumentException("The list cannot be null.");
+        }
+
+        // Check if list is empty
+        if (list.isEmpty()) {
+            throw new IllegalArgumentException("The list cannot be empty.");
+        }
+
         // Find middle of the list
         int mid = low + (high - low) / 2;
         // Set pivot value as the midpoint
