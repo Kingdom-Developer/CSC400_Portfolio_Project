@@ -11,6 +11,7 @@ import java.util.List;
 public class QuickSort {
 
     /**
+     * Breaks the low-high range into two parts based on a pivot value and returns the point where the split occurs
      *
      * @param list input List of generic data type
      * @param low the start index of the input List
