@@ -41,4 +41,16 @@ public class QuickSort {
         return highIndex;
     }
 
+    public static void quickSort(List<Person> list, int lowIndex, int highIndex,
+                                 Comparator<Person> comp) {
+
+        if (lowIndex >= highIndex) {
+            return; // base case
+        }
+
+        int lowEndIndex = partition(list, lowIndex, highIndex, comp);
+
+        quickSort(list, lowIndex, lowEndIndex, comp);
+        quickSort(list, lowEndIndex + 1, highIndex, comp);
+    }
 }

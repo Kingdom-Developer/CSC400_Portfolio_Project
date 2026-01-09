@@ -4,6 +4,15 @@ public class Queue<T> {
     private CustomLinkedList<T> queue = new CustomLinkedList<>();
 
     /**
+     * Retrieves the queue
+     *
+     * @return the queue as a CustomLinkedList object
+     */
+    public CustomLinkedList<T> getQueue() {
+        return queue;
+    }
+
+    /**
      * Retrieves the size of the queue
      *
      * @return the number of elements in the queue

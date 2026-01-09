@@ -1,6 +1,9 @@
 package com.Portfolio_Project;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -152,5 +155,24 @@ public class CustomLinkedList<T> {
             current = current.next;
             return data;
         }
+    }
+
+    /**
+     * Creates an array of items in the CustomLinkedList
+     *
+     * @return array of items in CustomLinkedList
+     */
+    public ArrayList<T> toList() {
+        ArrayList<T> list = new ArrayList<>();
+
+        int iteratorIndex = 0;
+        Iterator<T> it = iterator();
+
+        while (it.hasNext()) {
+            list.add(iteratorIndex, it.next());
+            iteratorIndex++;
+        }
+
+        return list;
     }
 }
