@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomLinkedListPersonTest {
-
     @Test
     void testInsertPerson() {
         CustomLinkedList<Person> list = new CustomLinkedList<>();
@@ -30,7 +29,6 @@ class CustomLinkedListPersonTest {
         list.insert(alice);
         list.insert(bob);
 
-        // deleteFirst returns the *data* of the removed node
         Person removed = list.deleteFirst();
         assertEquals(alice, removed);
 

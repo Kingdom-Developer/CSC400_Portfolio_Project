@@ -44,7 +44,6 @@ class QueueTest {
     void first() {
         Queue<String> queue = new Queue<>();
 
-        // Empty queue should return null
         assertNull(queue.first());
 
         queue.enqueue("Hello");
@@ -58,7 +57,6 @@ class QueueTest {
     void dequeue() {
         Queue<Integer> queue = new Queue<>();
 
-        // Empty queue should return null
         assertNull(queue.dequeue());
 
         queue.enqueue(1);
@@ -70,6 +68,6 @@ class QueueTest {
         assertEquals(3, queue.dequeue());
 
         assertTrue(queue.isEmpty());
-        assertNull(queue.dequeue()); // still null after empty
+        assertNull(queue.dequeue());
     }
 }
